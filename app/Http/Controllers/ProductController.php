@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Http\Controllers;
+
 //import model product
 use App\Models\Product; 
 
