@@ -2,17 +2,16 @@
 
 use Illuminate\Http\Request;
 
-// Menetapkan waktu mulai aplikasi
 define('LARAVEL_START', microtime(true));
 
-// Menentukan apakah aplikasi sedang dalam mode pemeliharaan...
+// Determine if the application is in maintenance mode...
 if (file_exists($maintenance = __DIR__.'/../storage/framework/maintenance.php')) {
     require $maintenance;
 }
 
-// Mendaftarkan autoloader Composer...
+// Register the Composer autoloader...
 require __DIR__.'/../vendor/autoload.php';
 
-// Mem-bootstrapping Laravel dan menangani request...
-$app = require_once __DIR__.'/../bootstrap/app.php';
-$app->run(Request::capture());
+// Bootstrap Laravel and handle the request...
+(require_once __DIR__.'/../bootstrap/app.php')
+    ->handleRequest(Request::capture());
