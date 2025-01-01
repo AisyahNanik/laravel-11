@@ -21,8 +21,13 @@ class UpdatePostRequest extends FormRequest
      */
     public function rules(): array
     {
+        //validate
         return [
-            //
+            'image'    => 'required|image|mimes:jpeg,jpg,png|max:2048',
+            'title'    => 'required|min:3',
+            'content'  => 'required|min:20',
+            'reporter' => 'required|min:3',
+            'source'   => 'required|min:3'
         ];
     }
 }

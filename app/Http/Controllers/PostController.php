@@ -7,6 +7,7 @@ use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -70,9 +71,11 @@ class PostController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Post $post)
+    public function edit(Post $id) : View
     {
-        //
+        $post = Post::findorFail($id);
+
+        return view('posts.edit', compact('post'));
     }
 
     /**
@@ -80,14 +83,55 @@ class PostController extends Controller
      */
     public function update(UpdatePostRequest $request, Post $post)
     {
-        //
+        //get post id
+        $post = Post::findorFail($id);
+
+        //check if image upload or not
+        if ($request->hasFile('image')) {
+
+            //upload new image
+            $image = $request->file('image');
+            $image->storeAs('public/post', $image->hashName());
+
+            //delete old image
+            Storage::delete('public/post'.$post->image);
+
+            //update post with new image
+            $post->update([
+                'image'         => $image->hashName(),
+                'title'         => $request->title,
+                'content'       => $request->content,
+                'reporter'      => $request->reporter,
+                'source'        => $request->source
+            ]);
+        } else {
+            //update post without image
+            $post->update([
+                'title'         => $request->title,
+                'content'       => $request->content,
+                'reporter'      => $request->reporter,
+                'source'        => $request->source
+            ]);
+        }
+        //redirect to index
+        return redirect()->route('posts.index')->with(['success' => 'Data Berhasil Diubah!']);
+        
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Post $post)
+    public function destroy(Post $id) : RedirectResponse
     {
-        //
+        $post = Post::findorFail($id);
+
+        //delete image
+        Storage::delete('public/post/'. $post->image);
+
+        //delete post
+        $post->delete();
+
+        //delete to index
+        return redirect()->route('posts.index')->with(['success' => 'Data Berhasil Dihapus!']);
     }
 }
