@@ -43,19 +43,21 @@ class SiswaController extends Controller
         //validate form
         $request->validate([
             'image'   => 'required|image|mimes:jpeg,jpg,png|max:2048',
-            'name'    => 'required|min:3',
-            'email'   => 'required|min:10',
-            'address' => 'required|min:5',
+            'name'    => 'required|string|max:255',
+            'email'   => 'required|email|max:255',
+            'address' => 'required|string',
             'phone'   => 'required|numeric'
         ]);
 
         //upload image
         $image = $request->file('image');
-        $image->storeAs('public/siswas', $image->hashName());
+        $imageName = $image->hashName();
+
+        $image->storeAs('public/siswas', $imageName());
 
         //create data of siswa
         Siswa::create([
-            'image'   => $image->hashName(),
+            'image'   => $imageName,
             'name'    => $request->name,
             'email'   => $request->email,
             'address' => $request->address,

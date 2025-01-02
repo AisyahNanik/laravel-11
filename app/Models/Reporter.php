@@ -5,20 +5,21 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Siswa extends Model
+class Reporter extends Model
 {
     use HasFactory;
 
     /**
      * fillable
+     *
      * @var array
-    */
-    protected $table = 'siswas';
+     */
     protected $fillable = [
-        'image',
+        'photo',
         'name',
         'email',
-        'address',
         'phone',
+        'address',
+        'age',
     ];
 }

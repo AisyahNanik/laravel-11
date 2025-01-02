@@ -59,7 +59,7 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Post $id) : View
+    public function show(string $id) : View
     {
         //get post by id
         $post = Post::findorFail($id);
@@ -71,7 +71,7 @@ class PostController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Post $id) : View
+    public function edit(string $id) : View
     {
         $post = Post::findorFail($id);
 
@@ -81,7 +81,7 @@ class PostController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatePostRequest $request, Post $post)
+    public function update(UpdatePostRequest $request, $id)
     {
         //get post id
         $post = Post::findorFail($id);
@@ -121,7 +121,7 @@ class PostController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Post $id) : RedirectResponse
+    public function destroy($id) : RedirectResponse
     {
         $post = Post::findorFail($id);
 

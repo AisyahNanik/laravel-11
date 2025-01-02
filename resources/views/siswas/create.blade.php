@@ -68,7 +68,7 @@
                                 
                                     <div class="form-group mb-3">
                                         <label class="font-weight-bold">PHONE</label>
-                                        <input type="number" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" placeholder="Masukkan Nomor Telepon Siswa">
+                                        <input type="tel" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" placeholder="Masukkan Nomor Telepon Siswa" inputmode="numeric">
                                     
                                         <!-- error message untuk phone -->
                                         @error('phone')

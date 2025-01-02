@@ -26,7 +26,6 @@
                                     <th scope="col">IMAGE</th>
                                     <th scope="col">NAME</th>
                                     <th scope="col">EMAIL</th>
-                                    <th scope="col">ADDRESS</th>
                                     <th scope="col">PHONE</th>
                                     <th scope="col" style="width: 20%">ACTIONS</th>
                                 </tr>
@@ -39,7 +38,6 @@
                                         </td>
                                         <td>{{ $siswa->name }}</td>
                                         <td>{{ $siswa->email }}</td>
-                                        <td>{{ $siswa->address }}</td>
                                         <td>{{ $siswa->phone }}</td>
                                         <td class="text-center">
                                             <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('siswas.destroy', $siswa->id) }}" method="POST">

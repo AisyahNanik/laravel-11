@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Data Posts - BeritaTerkini.com</title>
+    <title>Data Reporter - ReporterBerita.com</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body style="background: lightgray">
@@ -13,36 +13,38 @@
         <div class="row">
             <div class="col-md-12">
                 <div>
-                    <h3 class="text-center my-4">Berita Terbaru Hari Ini</h3>
-                    <h5 class="text-center"><a href="https://BeritaTerkini.com">www.BeritaTerkini.com</a></h5>
+                    <h3 class="text-center my-4">Data Reporter</h3>
+                    <h5 class="text-center"><a href="https://ReporterBerita.com">www.ReporterBerita.com</a></h5>
                     <hr>
                 </div>
                 <div class="card border-0 shadow-sm rounded">
                     <div class="card-body">
-                        <a href="{{ route('posts.create') }}" class="btn btn-md btn-success mb-3">ADD POST</a>
+                        <a href="{{ route('reporters.create') }}" class="btn btn-md btn-success mb-3">ADD REPORTER</a>
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
-                                    <th scope="col">IMAGE</th>
-                                    <th scope="col">TITLE</th>
-                                    <th scope="col">REPORTER</th>
-                                    <th scope="col">SOURCE</th>
+                                    <th scope="col">NAME</th>
+                                    <th scope="col">EMAIL</th>
+                                    <th scope="col">PHONE</th>
+                                    <th scope="col">AGE</th>
+                                    <th scope="col">PHOTO</th>
                                     <th scope="col" style="width: 20%">ACTIONS</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @forelse ($posts as $post)
+                                @forelse ($reporters as $reporter)
                                     <tr>
+                                        <td>{{ $reporter->name }}</td>
+                                        <td>{{ $reporter->email }}</td>
+                                        <td>{{ $reporter->phone }}</td>
+                                        <td>{{ $reporter->age }}</td>
                                         <td class="text-center">
-                                            <img src="{{ asset('storage/post/'.$post->image) }}" class="rounded" style="width: 150px">
+                                            <img src="{{ asset('/storage/reporters/'.$reporter->photo) }}" class="rounded" style="width: 150px">
                                         </td>
-                                        <td>{{ $post->title }}</td>
-                                        <td>{{ $post->reporter }}</td>
-                                        <td>{{ $post->source }}</td>
                                         <td class="text-center">
-                                            <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('posts.destroy', $post->id) }}" method="POST">
-                                                <a href="{{ route('posts.show', $post->id) }}" class="btn btn-sm btn-dark">SHOW</a>
-                                                <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-sm btn-primary">EDIT</a>
+                                            <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('reporters.destroy', $reporter->id) }}" method="POST">
+                                                <a href="{{ route('reporters.show', $reporter->id) }}" class="btn btn-sm btn-dark">SHOW</a>
+                                                <a href="{{ route('reporters.edit', $reporter->id) }}" class="btn btn-sm btn-primary">EDIT</a>
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-sm btn-danger">HAPUS</button>
@@ -51,12 +53,12 @@
                                     </tr>
                                 @empty
                                     <div class="alert alert-danger">
-                                        Data Posts belum Tersedia.
+                                        Data Reporter Belum Ada.
                                     </div>
                                 @endforelse
                             </tbody>
                         </table>
-                        {{ $posts->links() }}
+                        {{ $reporters->links() }}
                     </div>
                 </div>
             </div>

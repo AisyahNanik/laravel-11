@@ -21,15 +21,15 @@
             <div class="col-md-8">
                 <div class="card border-0 shadow-sm rounded">
                     <div class="card-body">
-                        <h3>{{ $post->title }}</h3>
+                        <h3>Title : {{ $post->title }}</h3>
                         <hr/>
                         <code>
-                            <p>{!! $post->content !!}</p>
+                            <p>Content : {!! $post->content !!}</p>
                         </code>
                         <hr/>
-                        <p>{{ $post->reporter }}</p>
+                        <p>Reporter : {{ $post->reporter }}</p>
                         <hr/>
-                        <p>Stock : {{ $post->source }}</p>
+                        <p>Source : {{ $post->source }}</p>
                     </div>
                 </div>
             </div>
