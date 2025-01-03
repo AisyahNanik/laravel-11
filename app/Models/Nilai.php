@@ -16,7 +16,7 @@ class Nilai extends Model
      */
     protected $fillable = [
         'basdon',
-        'bing',
+        'basing',
         'matematika',
         'ipa',
         'ips',

@@ -51,13 +51,11 @@ class SiswaController extends Controller
 
         //upload image
         $image = $request->file('image');
-        $imageName = $image->hashName();
-
-        $image->storeAs('public/siswas', $imageName());
+        $image->storeAs('public/siswas', $image->hashName());
 
         //create data of siswa
         Siswa::create([
-            'image'   => $imageName,
+            'image'   => $image->hashName(),
             'name'    => $request->name,
             'email'   => $request->email,
             'address' => $request->address,
