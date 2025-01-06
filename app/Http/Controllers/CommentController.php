@@ -29,7 +29,7 @@ class CommentController extends Controller
      */
     public function create(): View
     {
-        return view('products.create');
+        return view('comments.create');
     }
 
     /**
@@ -42,27 +42,137 @@ class CommentController extends Controller
     {
         //validate form
         $request->validate([
-            'image'         => 'required|image|mimes:jpeg,jpg,png|max:2048',
-            'title'         => 'required|min:5',
-            'description'   => 'required|min:10',
-            'price'         => 'required|numeric',
-            'stock'         => 'required|numeric'
+            'photo'        => 'required|image|mimes:jpeg,jpg,png|max:2048',
+            'name'         => 'required|min:5',
+            'email'        => 'required|min:10',
+            'phone'        => 'required|numeric',
+            'address'      => 'required|min:5',
+            'review'       => 'required|min:5'
         ]);
 
-        //upload image
-        $image = $request->file('image');
-        $image->storeAs('public/products', $image->hashName());
+        //upload photo
+        $photo = $request->file('photo');
+        $photo->storeAs('public/comments', $photo->hashName());
 
-        //create product
-        Product::create([
-            'image'         => $image->hashName(),
-            'title'         => $request->title,
-            'description'   => $request->description,
-            'price'         => $request->price,
-            'stock'         => $request->stock
+        //create comment
+        Comment::create([
+            'photo'        => $photo->hashName(),
+            'name'         => $request->name,
+            'email'        => $request->email,
+            'phone'        => $request->phone,
+            'address'      => $request->address,
+            'review'       => $request->review
         ]);
 
         //redirect to index
-        return redirect()->route('products.index')->with(['success' => 'Data Berhasil Disimpan!']);
+        return redirect()->route('comments.index')->with(['success' => 'Data Berhasil Disimpan!']);
+    }
+
+     /**
+     * show
+     *
+     * @param  mixed $id
+     * @return View
+     */
+    public function show(string $id): View
+    {
+        //get comment by ID
+        $comment = Comment::findOrFail($id);
+
+        //render view with comment
+        return view('comments.show', compact('comment'));
+    }
+
+    /**
+     * edit
+     *
+     * @param  mixed $id
+     * @return View
+     */
+    public function edit(string $id): View
+    {
+        //get comment by ID
+        $comment = Comment::findOrFail($id);
+
+        //render view with comment
+        return view('comments.edit', compact('comment'));
+    }
+        
+    /**
+     * update
+     *
+     * @param  mixed $request
+     * @param  mixed $id
+     * @return RedirectResponse
+     */
+    public function update(Request $request, $id): RedirectResponse
+    {
+        //validate form
+        $request->validate([
+            'photo'        => 'required|image|mimes:jpeg,jpg,png|max:2048',
+            'name'         => 'required|min:5',
+            'email'        => 'required|min:10',
+            'phone'        => 'required|numeric',
+            'address'      => 'required|min:5',
+            'review'       => 'required|min:5'
+        ]);
+
+        //get  by ID
+        $comment = Comment::findOrFail($id);
+
+        //check if photo is uploaded
+        if ($request->hasFile('photo')) {
+
+            //upload new photo
+            $photo = $request->file('photo');
+            $photo->storeAs('public/comments', $photo->hashName());
+
+            //delete old photo
+            Storage::delete('public/comments/'.$comment->photo);
+
+            //update comment with new photo
+            $comment->update([
+                'photo'        => $photo->hashName(),
+                'name'         => $request->name,
+                'email'        => $request->email,
+                'phone'        => $request->phone,
+                'address'      => $request->address,
+                'review'       => $request->review
+            ]);
+
+        } else {
+
+            //update comment without photo
+            $comment->update([
+                'name'         => $request->name,
+                'email'        => $request->email,
+                'phone'        => $request->phone,
+                'address'      => $request->address,
+                'review'       => $request->review
+            ]);
+        }
+
+        //redirect to index
+        return redirect()->route('comments.index')->with(['success' => 'Data Berhasil Diubah!']);
+    }
+    /**
+     * destroy
+     *
+     * @param  mixed $id
+     * @return RedirectResponse
+     */
+    public function destroy($id): RedirectResponse
+    {
+        //get comment by ID
+        $comment = Comment::findOrFail($id);
+
+        //delete photo
+        Storage::delete('public/comments/'. $comment->photo);
+
+        //delete comment
+        $comment->delete();
+
+        //redirect to index
+        return redirect()->route('comments.index')->with(['success' => 'Data Berhasil Dihapus!']);
     }
 }

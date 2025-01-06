@@ -23,22 +23,22 @@
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
+                                    <th scope="col">Photo</th>
                                     <th scope="col">NAME</th>
                                     <th scope="col">EMAIL</th>
                                     <th scope="col">PHONE</th>
-                                    <th scope="col">ADDRESS</th>
-                                    <th scope="col">REVIEW</th>
                                     <th scope="col" style="width: 20%">ACTIONS</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @forelse ($comments as $comment)
                                     <tr>
+                                        <td class="text-center">
+                                            <img src="{{ asset('/storage/comments/'.$comment->photo) }}" class="rounded" style="width: 150px">
+                                        </td>
                                         <td>{{ $comment->name }}</td>
                                         <td>{{ $comment->email }}</td>
                                         <td>{{ $comment->phone }}</td>
-                                        <td>{{ $comment->address }}</td>
-                                        <td>{{ $comment->review }}</td>
                                         <td class="text-center">
                                             <form onsubmit="return confirm('Are you sure? ?');" action="{{ route('comments.destroy', $comment->id) }}" method="POST">
                                                 <a href="{{ route('comments.show', $comment->id) }}" class="btn btn-sm btn-dark">SHOW</a>
