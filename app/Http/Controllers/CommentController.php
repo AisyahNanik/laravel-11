@@ -6,6 +6,8 @@ use App\Models\Comment;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+
 
 class CommentController extends Controller
 {
