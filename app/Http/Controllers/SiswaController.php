@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Siswa;
 use Illuminate\View\View;
+use Illuminate\Support\facades\Storage;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
@@ -79,6 +80,21 @@ class SiswaController extends Controller
 
         //render view with siswa
         return view('siswas.show', compact('siswa'));
+    }
+
+    /**
+     * edit
+     *
+     * @param  mixed $id
+     * @return View
+     */
+    public function edit(string $id): View
+    {
+        //get siswa by ID
+        $siswa = Siswa::findOrFail($id);
+
+        //render view with siswa
+        return view('siswas.edit', compact('siswa'));
     }
 
     public function update(Request $request, $id): RedirectResponse

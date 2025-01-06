@@ -14,7 +14,7 @@
             <div class="col-md-12">
                 <div class="card border-0 shadow-sm rounded">
                     <div class="card-body">
-                        <form action="{{ route('posts.update', $post->id) }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('siswas.update', $siswa->id) }}" method="POST" enctype="multipart/form-data">
                         
                             @csrf
                             @method('PUT')
@@ -33,7 +33,7 @@
 
                             <div class="form-group mb-3">
                                 <label class="font-weight-bold">NAME</label>
-                                <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name', $product->name) }}" placeholder="Masukkan Nama Siswa">
+                                <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name', $siswa->name) }}" placeholder="Masukkan Nama Siswa">
                             
                                 <!-- error message untuk name -->
                                 @error('name')
@@ -45,7 +45,7 @@
 
                             <div class="form-group mb-3">
                                 <label class="font-weight-bold">EMAIL</label>
-                                <input type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email', $product->email) }}" placeholder="Masukkan Email Siswa">
+                                <input type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email', $siswa->email) }}" placeholder="Masukkan Email Siswa">
                             
                                 <!-- error message untuk email -->
                                 @error('email')
@@ -57,7 +57,7 @@
 
                                     <div class="form-group mb-3">
                                         <label class="font-weight-bold">ADDRESS</label>
-                                        <textarea type="text" class="form-control @error('address') is-invalid @enderror" name="address" row="5" placeholder="Masukkan Alamat Siswa">{{ old('address', $product->address) }}</textarea>
+                                        <textarea type="text" class="form-control @error('address') is-invalid @enderror" name="address" row="5" placeholder="Masukkan Alamat Siswa">{{ old('address', $siswa->address) }}</textarea>
                                         
                                         <!-- error message untuk address -->
                                         @error('address')
@@ -69,7 +69,7 @@
                                 
                                     <div class="form-group mb-3">
                                         <label class="font-weight-bold">PHONE</label>
-                                        <input type="number" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone', $product->phone) }}" placeholder="Masukkan Nomor Telepon Siswa">
+                                        <input type="number" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone', $siswa->phone) }}" placeholder="Masukkan Nomor Telepon Siswa">
                                     
                                         <!-- error message untuk phone -->
                                         @error('phone')

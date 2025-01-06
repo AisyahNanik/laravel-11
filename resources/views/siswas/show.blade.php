@@ -21,14 +21,14 @@
             <div class="col-md-8">
                 <div class="card border-0 shadow-sm rounded">
                     <div class="card-body">
-                        <h3>{{ $siswa->name }}</h3>
+                        <h3>Name : {{ $siswa->name }}</h3>
                         <hr/>
-                        <p>{{ $siswa->email }}</p>
+                        <p> Email : {{ $siswa->email }}</p>
                         <code>
-                            <p>{!! $siswa->address !!}</p>
+                            <p>Address : {!! $siswa->address !!}</p>
                         </code>
                         <hr/>
-                        <p>Stock : {{ $siswa->phone }}</p>
+                        <p>Phone : {{ $siswa->phone }}</p>
                     </div>
                 </div>
             </div>
