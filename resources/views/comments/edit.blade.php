@@ -16,6 +16,9 @@
                     <div class="card-body">
                         <form action="{{ route('comments.update', $comment->id) }}" method="POST" enctype="multipart/form-data">
                         
+                        @csrf
+                        @method('PUT')
+                        
                         <div class="form-group mb-3">
                                 <label class="font-weight-bold">PHOTO</label>
                                 <input type="file" class="form-control @error('photo') is-invalid @enderror" name="photo">
