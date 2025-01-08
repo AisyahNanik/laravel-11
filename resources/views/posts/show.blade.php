@@ -30,6 +30,31 @@
                         <p>Reporter : {{ $post->reporter }}</p>
                         <hr/>
                         <p>Source : {{ $post->source }}</p>
+
+                        <h2>Comments</h2>
+                        @foreach($post->comments as $comment)
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <p>{{ $comment->content }}</p>
+                                    <small class="text-muted">by {{ $comment->author }}</small>
+                                </div>
+                            </div>
+                        @endforeach
+
+                        <h2>Add a Comment</h2>
+                        <form action="{{ route('comments.store', $post) }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="post_id" value="{{ $post->id }}" />
+                            <div class="mb-3">
+                                <label for="content" class="form-label">Content</label>
+                                <textarea name="content" id="content" class="form-control" rows="3" required></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="author" class="form-label">Author</label>
+                                <input type="text" name="author" id="author" class="form-control" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Add Comment</button>
+                        </form>
                     </div>
                 </div>
             </div>

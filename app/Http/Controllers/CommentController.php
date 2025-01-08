@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
+use App\Models\Post;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -43,31 +44,38 @@ class CommentController extends Controller
     public function store(Request $request): RedirectResponse
     {
         //validate form
-        $request->validate([
-            'photo'        => 'required|image|mimes:jpeg,jpg,png|max:2048',
-            'name'         => 'required|min:5',
-            'email'        => 'required|min:10',
-            'phone'        => 'required|numeric',
-            'address'      => 'required|min:5',
-            'review'       => 'required|min:5'
-        ]);
+        // $request->validate([
+        //     'post_id'      => 'required|exists:posts,id', // Validasi untuk memastikan post_id valid
+        //     'photo'        => 'required|image|mimes:jpeg,jpg,png|max:2048',
+        //     'name'         => 'required|min:5',
+        //     'email'        => 'required|min:10',
+        //     'phone'        => 'required|numeric',
+        //     'address'      => 'required|min:5',
+        //     'review'       => 'required|min:5'
+        // ]);
+              
 
         //upload photo
-        $photo = $request->file('photo');
-        $photo->storeAs('public/comments', $photo->hashName());
+        // $photo = $request->file('photo');
+        // $photo->storeAs('public/comments', $photo->hashName());
 
         //create comment
         Comment::create([
-            'photo'        => $photo->hashName(),
-            'name'         => $request->name,
-            'email'        => $request->email,
-            'phone'        => $request->phone,
-            'address'      => $request->address,
-            'review'       => $request->review
-        ]);
+            'post_id'      => $request->post_id,
+            // 'photo'        => $photo->hashName(),
+            
+            'content'         => $request->content,
+            'author'        => $request->author,
 
+            // 'name'         => $request->name,
+            // 'email'        => $request->email,
+            // 'phone'        => $request->phone,
+            // 'address'      => $request->address,
+            // 'review'       => $request->review
+        ]);
+        
         //redirect to index
-        return redirect()->route('comments.index')->with(['success' => 'Data Berhasil Disimpan!']);
+        return redirect()->route('posts.show', $request->post_id)->with(['success' => 'Data Berhasil Disimpan!']);
     }
 
      /**

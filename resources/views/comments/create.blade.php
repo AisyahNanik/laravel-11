@@ -18,6 +18,8 @@
                         
                             @csrf
 
+                            <input type="hidden" name="post_id" value="{{ $post->id }}">
+
                             <div class="form-group mb-3">
                                 <label class="font-weight-bold">PHOTO</label>
                                 <input type="file" class="form-control @error('photo') is-invalid @enderror" name="photo">

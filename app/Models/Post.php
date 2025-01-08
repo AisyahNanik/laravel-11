@@ -23,4 +23,9 @@ class Post extends Model
         'reporter',
         'source',
     ];
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
 }

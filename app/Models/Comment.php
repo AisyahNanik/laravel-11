@@ -15,6 +15,9 @@ class Comment extends Model
      * @var array
      */
     protected $fillable = [
+        'post_id',
+        'content',
+        'author',
         'photo',
         'name',
         'email',
@@ -22,4 +25,9 @@ class Comment extends Model
         'address',
         'review',
     ];
+     // Relasi ke Post
+     public function post()
+     {
+         return $this->belongsTo(Post::class);
+     }
 }

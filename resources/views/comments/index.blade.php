@@ -33,6 +33,7 @@
                             <tbody>
                                 @forelse ($comments as $comment)
                                     <tr>
+                                        <h1>Comment for Post: {{ $post->title }}</h1>
                                         <td class="text-center">
                                             <img src="{{ asset('/storage/comments/'.$comment->photo) }}" class="rounded" style="width: 150px">
                                         </td>
