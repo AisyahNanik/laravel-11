@@ -47,7 +47,7 @@ class PostController extends Controller
             'image'    => $image->hashName(),
             'title'    => $request->title,
             'content'  => $request->content,
-            'reporter' => $request->reporter,
+            'user_id'  => Auth::id(),
             'source'   => $request->source
         ]);
 

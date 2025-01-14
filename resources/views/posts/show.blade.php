@@ -27,7 +27,7 @@
                             <p>Content : {!! $post->content !!}</p>
                         </code>
                         <hr/>
-                        <p>Reporter : {{ $post->reporter }}</p>
+                        <p>Reporter : {{ $post->user->name }}</p>
                         <hr/>
                         <p>Source : {{ $post->source }}</p>
 
