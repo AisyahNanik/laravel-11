@@ -36,7 +36,7 @@
                             <div class="card mb-3">
                                 <div class="card-body">
                                     <p>{{ $comment->content }}</p>
-                                    <small class="text-muted">by {{ $comment->author }}</small>
+                                    <small class="text-muted">by {{ $comment->user->name }}</small>
                                 </div>
                             </div>
                         @endforeach
@@ -49,10 +49,10 @@
                                 <label for="content" class="form-label">Content</label>
                                 <textarea name="content" id="content" class="form-control" rows="3" required></textarea>
                             </div>
-                            <div class="mb-3">
-                                <label for="author" class="form-label">Author</label>
-                                <input type="text" name="author" id="author" class="form-control" required>
-                            </div>
+                            <!-- <div class="mb-3">
+                                <label for="user_id" class="form-label">Author</label>
+                                <input type="text" name="user_id" id="user_id" class="form-control" required>
+                            </div> -->
                             <button type="submit" class="btn btn-primary">Add Comment</button>
                         </form>
                     </div>

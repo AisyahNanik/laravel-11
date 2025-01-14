@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('post_id'); //->after('id'); // Menambahkan kolom post_id setelah kolom id
             $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade'); // Menambahkan foreign key
             $table->string('content');
-            $table->string('author');
+            // $table->string('author');
             $table->timestamps();
         });
     }

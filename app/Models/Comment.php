@@ -17,7 +17,7 @@ class Comment extends Model
     protected $fillable = [
         'post_id',
         'content',
-        'author',
+        'user_id',
         'photo',
         'name',
         'email',
@@ -29,5 +29,10 @@ class Comment extends Model
      public function post()
      {
          return $this->belongsTo(Post::class);
+     }
+
+     public function user()
+     {
+         return $this->belongsTo(User::class);
      }
 }

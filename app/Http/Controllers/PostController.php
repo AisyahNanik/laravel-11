@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\StorePostRequest;
@@ -36,7 +37,10 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request): RedirectResponse
     {
-        
+        // Pastikan pengguna sudah login
+        if (!Auth::check()) {
+            return redirect()->route('login')->withErrors('Please login to create a post.');
+        }
 
         //upload image
         $image = $request->file('image');
