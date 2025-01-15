@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Show Products - SantriKoding.com</title>
+    <title>Show Products - TokoNanik.com</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body style="background: lightgray">
@@ -29,6 +29,27 @@
                         </code>
                         <hr/>
                         <p>Stock : {{ $product->stock }}</p>
+
+                        <h2>Reviews</h2>
+                        @foreach($product->reviews as $review)
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <p>{{ $review->content }}</p>
+                                    <small class="text-muted">by {{ $review->user->name }}</small>
+                                </div>
+                            </div>
+                        @endforeach
+
+                        <h2>Add a Review</h2>
+                        <form action="{{ route('reviews.store', $product) }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="product_id" value="{{ $product->id }}" />
+                            <div class="mb-3">
+                                <label for="content" class="form-label">Content</label>
+                                <textarea name="content" id="content" class="form-control" rows="3" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Add Review</button>
+                        </form>
                     </div>
                 </div>
             </div>
